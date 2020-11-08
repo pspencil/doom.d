@@ -1,0 +1,156 @@
+#+TITLE: My emacs doom configuration
+#+AUTHOR: Song Pan
+#+EMAIL: pan.song@dhs.sg
+
+* Tasks
+This section keeps track of what I plan to change.
+** Find a good way for emacs to read ssh agent related stuff so Magit can push.
+* Configuration
+** Lexical binding
+Use lexical-binding. [[https://nullprogram.com/blog/2016/12/22/][Why?]]
+
+#+BEGIN_QUOTE
+Until Emacs 24.1 (June 2012), Elisp only had dynamically scoped variables,
+a feature, mostly by accident, common to old lisp dialects. While dynamic
+scope has some selective uses, it’s widely regarded as a mistake for local
+variables, and virtually no other languages have adopted it.
+#+END_QUOTE
+
+#+begin_src elisp
+;;; config.el --- -*- lexical-binding: t -*-
+#+end_src
+** Personal details
+#+begin_src elisp
+(setq user-full-name "Song Pan"
+      user-mail-address "pan.song@dhs.sg")
+#+end_src
+** Org directory
+The default doom comment said this should be done before org loads.
+#+begin_src elisp
+(setq org-directory "~/org/")
+#+end_src
+** Appearance
+*** Line number
+#+begin_src elisp
+(setq display-line-numbers-type 'relative)
+#+end_src
+*** Theme
+The default one.
+#+begin_src elisp
+(setq doom-theme 'doom-one)
+#+end_src
+*** Fonts
+#+begin_src elisp
+(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light))
+#+end_src
+
+*** Show matching paranthesis
+#+begin_src elisp
+(use-package paren
+  :defer t
+  :ensure nil
+  :init (setq show-paren-delay 0.5)
+  :config (show-paren-mode +1))
+#+end_src
+*** Org bullets
+#+begin_src elisp
+(use-package! org-bullets
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+#+end_src
+** Editing experience
+*** Escape key
+I am used to "fd". The only inconvenience I found is for variable name for
+file descriptor. Luckily I don't write C that much.
+#+begin_src elisp
+(after! evil-escape
+  (setq evil-escape-key-sequence "fd"))
+#+end_src
+*** Undo limit
+#+begin_src elisp
+(setq undo-limit 80000000)
+#+end_src
+*** Treat CamelCase as multiple words
+#+begin_src elisp
+(global-subword-mode 1)
+#+end_src
+*** Default to org mode
+#+begin_src elisp
+(setq-default major-mode 'org-mode)
+#+end_src
+*** Magit "gravatars"
+Some random things I saw online. Not sure what it does actually.
+#+begin_src elisp
+(setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
+#+end_src
+** Moving around
+*** Preview ivy buffers
+#+begin_src elisp
+(setq +ivy-buffer-preview t)
+#+end_src
+*** Display path in ivy-rich.
+Ivy-rich has a [[https://github.com/Yevgnen/ivy-rich/issues/53][bug/feature]] that doesn't show a buffer's path if projectile
+is enabled but the buffer is not in a project. This is a workaround to
+fallback to absolute path in that case.
+#+begin_src elisp
+(after! ivy-rich
+  (setq ivy-rich-path-style 'abbrev)
+  (defadvice! ivy-rich-no-project-fallback (orig-fn candidate)
+    :around #'ivy-rich--switch-buffer-root-and-filename
+    (if-let ((result (funcall orig-fn candidate)))
+        result
+      (cons ""
+            (expand-file-name (ivy-rich--switch-buffer-directory candidate))))))
+#+end_src
+*** Prompt for a buffer when splitting windows
+I almost always do this
+immediately afterwards anyway.
+#+begin_src elisp
+(defadvice! prompt-for-buffer (&rest _)
+  :after '(evil-window-split evil-window-vsplit)
+  (+ivy/switch-buffer))
+#+end_src
+** Custom Keybindings
+*** SPC TAB TAB to "last" workspace.
+#+begin_src elisp
+(map! :leader
+      (:when (featurep! :ui workspaces)
+       (:prefix-map ("TAB" . "workspace")
+        :desc "Switch to last workspace" "TAB" #'+workspace/other)))
+#+end_src
+** Other
+*** Auto save every buffer
+#+begin_src elisp
+(setq auto-save-default t)
+#+end_src
+*** Auto revert buffers from disk
+Auto refreshes every 2 seconds.
+#+begin_src elisp
+(use-package! autorevert
+  :defer t
+  :ensure nil
+  :config
+  (global-auto-revert-mode +1)
+  (setq auto-revert-interval 2
+        auto-revert-check-vc-info t
+        auto-revert-verbose nil))
+#+end_src
+*** Don't bother confirming killing process
+#+begin_src elisp
+(use-package! files
+  :defer t
+  :config
+  (setq confirm-kill-processes nil))
+#+end_src
+*** Auto save when emacs is out of focus
+Taken from[[http://ergoemacs.org/emacs/emacs_auto_save.html][ Emacs auto save]] 
+#+begin_src elisp
+(defun xah-save-all-unsaved ()
+  "Save all unsaved files. no ask.
+Version 2019-11-05"
+  (interactive)
+  (save-some-buffers t))
+
+;; when switching out of emacs, all unsaved files will be saved
+(add-hook 'focus-out-hook 'xah-save-all-unsaved)
+#+end_src
