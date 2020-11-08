@@ -54,7 +54,7 @@
 ;; they are implemented.
 
 ;; -----------------------------------------------------------------------------
-;; Packages and configs
+;; New packages and configs
 ;; -----------------------------------------------------------------------------
 (use-package! keyfreq
   :config
@@ -89,6 +89,14 @@
         result
       (cons ""
             (expand-file-name (ivy-rich--switch-buffer-directory candidate))))))
+
+;; -----------------------------------------------------------------------------
+;; Workspace related stuff
+;; -----------------------------------------------------------------------------
+(map! :leader
+      (:when (featurep! :ui workspaces)
+       (:prefix-map ("TAB" . "workspace")
+        :desc "Switch to last workspace" "TAB" #'+workspace/other)))
 
 ;; -----------------------------------------------------------------------------
 ;; Misc
