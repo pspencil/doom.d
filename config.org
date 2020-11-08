@@ -58,6 +58,7 @@ The default one.
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+end_src
+<<<<<<< HEAD
 *** Ligatures
 Taken from the ligatures doc.
 #+begin_src elisp
@@ -106,6 +107,8 @@ Taken from the ligatures doc.
   :dot           "Dot operator")
 #+end_src
 
+=======
+>>>>>>> 72544b674b609abe8784daf645f10183da41ca6a
 ** Editing experience
 *** Escape key
 I am used to "fd". The only inconvenience I found is for variable name for
