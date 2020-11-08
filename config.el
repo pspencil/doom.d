@@ -67,6 +67,14 @@
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1))
 
+(use-package autorevert
+  :defer t
+  :ensure nil
+  :config
+  (global-auto-revert-mode +1)
+  (setq auto-revert-interval 2
+        auto-revert-check-vc-info t
+        auto-revert-verbose nil))
 ;; -----------------------------------------------------------------------------
 ;; Better defaults
 ;; -----------------------------------------------------------------------------
