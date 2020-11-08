@@ -59,7 +59,11 @@
 (use-package! keyfreq
   :config
   (setq keyfreq-excluded-commands
-        '(self-insert-command))
+        '(self-insert-command
+          vterm--self-insert
+          org-self-insert-command
+          vterm-send-backspace
+          ))
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1))
 
@@ -97,6 +101,12 @@
       (:when (featurep! :ui workspaces)
        (:prefix-map ("TAB" . "workspace")
         :desc "Switch to last workspace" "TAB" #'+workspace/other)))
+
+;; -----------------------------------------------------------------------------
+;; Magit related stuff
+;; -----------------------------------------------------------------------------
+
+(setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
 
 ;; -----------------------------------------------------------------------------
 ;; Misc
