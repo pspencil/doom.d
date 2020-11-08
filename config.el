@@ -91,6 +91,10 @@
   :after '(evil-window-split evil-window-vsplit)
   (+ivy/switch-buffer))
 
+;; (defadvice! always-keep-others-when-saving-perspective (&optional fname phash name keep-others &rest rest-args)
+;;   :filter-args #'persp-save-to-file-by-names
+;;   '(fname phash name t rest-args))
+
 (map! :leader
       (:when (featurep! :ui workspaces)
        (:prefix-map ("TAB" . "workspace")

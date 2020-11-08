@@ -153,14 +153,24 @@ fallback to absolute path in that case.
       (cons ""
             (expand-file-name (ivy-rich--switch-buffer-directory candidate))))))
 #+end_src
+** Editor flow optimisation
 *** Prompt for a buffer when splitting windows
-I almost always do this
-immediately afterwards anyway.
+I almost always do this immediately afterwards anyway.
 #+begin_src elisp
 (defadvice! prompt-for-buffer (&rest _)
   :after '(evil-window-split evil-window-vsplit)
   (+ivy/switch-buffer))
 #+end_src
+*** Do not prompt "keep others" when manually saving
+When saving perspectives, it always prompt me if I wanna keep others in
+the same file. Yes I do. This is a failed attempt to always put =t= to
+=keep-others=.
+#+begin_src elisp
+;; (defadvice! always-keep-others-when-saving-perspective (&optional fname phash name keep-others &rest rest-args)
+;;   :filter-args #'persp-save-to-file-by-names
+;;   '(fname phash name t rest-args))
+#+end_src
+
 ** Custom Keybindings
 *** SPC TAB TAB to "last" workspace.
 #+begin_src elisp
