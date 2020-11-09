@@ -179,6 +179,17 @@ the same file. Yes I do. This is a failed attempt to always put =t= to
        (:prefix-map ("TAB" . "workspace")
         :desc "Switch to last workspace" "TAB" #'+workspace/other)))
 #+end_src
+*** Window splitting
+I like to use =-= to mean horizontal split and =/= to mean vertial.
+#+begin_src elisp
+(define-key evil-window-map "/" 'evil-window-vsplit)
+(define-key evil-window-map "-" 'evil-window-split)
+#+end_src
+=SPC w -= was mapped to something else so we preserve it by remapping it
+to =SPC w C--=
+#+begin_src elisp
+(define-key evil-window-map (kbd "C--") 'evil-window-decrease-height)
+#+end_src
 ** Other
 *** Auto save every buffer
 #+begin_src elisp

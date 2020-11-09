@@ -100,6 +100,11 @@
        (:prefix-map ("TAB" . "workspace")
         :desc "Switch to last workspace" "TAB" #'+workspace/other)))
 
+(define-key evil-window-map "/" 'evil-window-vsplit)
+(define-key evil-window-map "-" 'evil-window-split)
+
+(define-key evil-window-map (kbd "C--") 'evil-window-decrease-height)
+
 (setq auto-save-default t)
 
 (use-package! autorevert
