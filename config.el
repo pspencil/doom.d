@@ -95,10 +95,8 @@
 ;;   :filter-args #'persp-save-to-file-by-names
 ;;   '(fname phash name t rest-args))
 
-;; Currently conflicts with evil-snipe
-;; (setq evil-snipe-override-evil-repeat-keys nil)
-;; (setq doom-localleader-key ",")
-;; (setq doom-localleader-alt-key "M-,")
+(setq doom-localleader-key ",")
+(setq doom-localleader-alt-key "M-,")
 
 (map! :leader
       (:when (featurep! :ui workspaces)

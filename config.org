@@ -172,10 +172,8 @@ the same file. Yes I do. This is a failed attempt to always put =t= to
 *** Local leader
 =SPC M= is too long.
 #+begin_src elisp
-;; Currently conflicts with evil-snipe
-;; (setq evil-snipe-override-evil-repeat-keys nil)
-;; (setq doom-localleader-key ",")
-;; (setq doom-localleader-alt-key "M-,")
+(setq doom-localleader-key ",")
+(setq doom-localleader-alt-key "M-,")
 #+end_src
 *** SPC TAB TAB to "last" workspace.
 #+begin_src elisp
