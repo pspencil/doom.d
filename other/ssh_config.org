@@ -1,0 +1,16 @@
+#+TITLE: My SSH configuration
+#+PROPERTY: header-args :tangle ~/.ssh/config :tangle-mode (identity #o644)
+
+* My SSH Config
+** Github access
+#+begin_src conf
+Host github.com
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/github
+#+end_src
+If the key has not been generated, execute
+#+begin_src bash
+ssh-keygen -t ed25519 -C "pan.song@dhs.sg" -f ~/.ssh/github
+#+end_src
+Then add to github.
+

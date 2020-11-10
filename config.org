@@ -4,13 +4,7 @@
 
 * Tasks
 This section keeps track of what I plan to change.
-** DONE Find a good way for emacs to read ssh agent related stuff so Magit can push.
-Add the following into =~/.ssh/config=
-#+begin_src conf :tangle no
-Host github.com
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/your_github_private_key
-#+end_src
+** Make escape key work in vterm mode
 * Configuration
 ** Lexical binding
 Use lexical-binding. [[https://nullprogram.com/blog/2016/12/22/][Why?]]
@@ -232,3 +226,7 @@ Version 2019-11-05"
 ;; when switching out of emacs, all unsaved files will be saved
 (add-hook 'focus-out-hook 'xah-save-all-unsaved)
 #+end_src
+
+* Notes
+** Making magit push to github directly using ssh key
+See [[file:other/ssh_config.org::*Github access][Github access]].
