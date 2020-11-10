@@ -4,7 +4,13 @@
 
 * Tasks
 This section keeps track of what I plan to change.
-** Find a good way for emacs to read ssh agent related stuff so Magit can push.
+** DONE Find a good way for emacs to read ssh agent related stuff so Magit can push.
+Add the following into =~/.ssh/config=
+#+begin_src conf :tangle no
+Host github.com
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/your_github_private_key
+#+end_src
 * Configuration
 ** Lexical binding
 Use lexical-binding. [[https://nullprogram.com/blog/2016/12/22/][Why?]]
