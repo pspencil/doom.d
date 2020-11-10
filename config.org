@@ -58,7 +58,6 @@ The default one.
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+end_src
-<<<<<<< HEAD
 *** Ligatures
 Taken from the ligatures doc.
 #+begin_src elisp
@@ -107,8 +106,6 @@ Taken from the ligatures doc.
   :dot           "Dot operator")
 #+end_src
 
-=======
->>>>>>> 72544b674b609abe8784daf645f10183da41ca6a
 ** Editing experience
 *** Escape key
 I am used to "fd". The only inconvenience I found is for variable name for
@@ -172,6 +169,14 @@ the same file. Yes I do. This is a failed attempt to always put =t= to
 #+end_src
 
 ** Custom Keybindings
+*** Local leader
+=SPC M= is too long.
+#+begin_src elisp
+;; Currently conflicts with evil-snipe
+;; (setq evil-snipe-override-evil-repeat-keys nil)
+;; (setq doom-localleader-key ",")
+;; (setq doom-localleader-alt-key "M-,")
+#+end_src
 *** SPC TAB TAB to "last" workspace.
 #+begin_src elisp
 (map! :leader
@@ -182,8 +187,9 @@ the same file. Yes I do. This is a failed attempt to always put =t= to
 *** Window splitting
 I like to use =-= to mean horizontal split and =/= to mean vertial.
 #+begin_src elisp
-(define-key evil-window-map "/" 'evil-window-vsplit)
-(define-key evil-window-map "-" 'evil-window-split)
+(after! evil
+  (define-key evil-window-map "/" 'evil-window-vsplit)
+  (define-key evil-window-map "-" 'evil-window-split))
 #+end_src
 =SPC w -= was mapped to something else so we preserve it by remapping it
 to =SPC w C--=

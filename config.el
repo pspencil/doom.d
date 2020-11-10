@@ -95,13 +95,19 @@
 ;;   :filter-args #'persp-save-to-file-by-names
 ;;   '(fname phash name t rest-args))
 
+;; Currently conflicts with evil-snipe
+;; (setq evil-snipe-override-evil-repeat-keys nil)
+;; (setq doom-localleader-key ",")
+;; (setq doom-localleader-alt-key "M-,")
+
 (map! :leader
       (:when (featurep! :ui workspaces)
        (:prefix-map ("TAB" . "workspace")
         :desc "Switch to last workspace" "TAB" #'+workspace/other)))
 
-(define-key evil-window-map "/" 'evil-window-vsplit)
-(define-key evil-window-map "-" 'evil-window-split)
+(after! evil
+  (define-key evil-window-map "/" 'evil-window-vsplit)
+  (define-key evil-window-map "-" 'evil-window-split))
 
 (define-key evil-window-map (kbd "C--") 'evil-window-decrease-height)
 
