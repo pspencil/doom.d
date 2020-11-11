@@ -1,5 +1,5 @@
 #+TITLE: My SSH configuration
-#+PROPERTY: header-args :tangle ~/.ssh/config :tangle-mode (identity #o644)
+#+PROPERTY: header-args :tangle ~/.ssh/config :tangle-mode (identity #o644) :mkdirp yes
 
 * Github access
 #+begin_src conf
