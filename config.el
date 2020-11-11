@@ -92,6 +92,8 @@
 ;;   :filter-args #'persp-save-to-file-by-names
 ;;   '(fname phash name t rest-args))
 
+(setq ivy-extra-directories '("."))
+
 (setq auth-sources '("~/.authinfo"))
 
 (setq doom-localleader-key ",")

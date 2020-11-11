@@ -164,7 +164,11 @@ the same file. Yes I do. This is a failed attempt to always put =t= to
 ;;   :filter-args #'persp-save-to-file-by-names
 ;;   '(fname phash name t rest-args))
 #+end_src
-
+*** Do not display ".." in find file.
+"." might still be useful for dired here.
+#+begin_src elisp
+(setq ivy-extra-directories '("."))
+#+end_src
 ** Features
 *** Magit Forge setup
 Note we need to follow [[https://magit.vc/manual/forge/Getting-Started.html#Getting-Started][forge manual]] to setup the token. Then use =M-x
