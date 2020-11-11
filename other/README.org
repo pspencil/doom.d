@@ -1,0 +1,5 @@
+#+TITLE:   Other non-emacs configurations
+
+* Other non-emacs configurations
+This directory contains all the non-emacs configurations I'd like to make to
+various programs. They can be updated by running [[file:reload.sh][reload.sh]].
