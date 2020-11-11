@@ -11,15 +11,12 @@
 
 (setq doom-font (font-spec :family "Hasklig" :size 19 :weight 'semi-light))
 
-(use-package paren
-  :defer t
-  :ensure nil
-  :init (setq show-paren-delay 0.5)
-  :config (show-paren-mode +1))
+(after! smartparens
+  (show-smartparens-global-mode))
 
 (use-package! org-bullets
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  :after org
+  :hook (org-mode . org-bullets-mode))
 
 (after! go-mode ; in this case the major mode and package named the same thing
   (set-ligatures! 'go-mode
@@ -118,9 +115,7 @@
   (global-auto-revert-mode 1)
   (setq auto-revert-check-vc-info t))
 
-(use-package! files
-  :defer t
-  :config
+(after! files
   (setq confirm-kill-processes nil))
 
 (defun xah-save-all-unsaved ()

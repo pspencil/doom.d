@@ -46,17 +46,14 @@ The default one.
 
 *** Show matching paranthesis
 #+begin_src elisp
-(use-package paren
-  :defer t
-  :ensure nil
-  :init (setq show-paren-delay 0.5)
-  :config (show-paren-mode +1))
+(after! smartparens
+  (show-smartparens-global-mode))
 #+end_src
 *** Org bullets
 #+begin_src elisp
 (use-package! org-bullets
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  :after org
+  :hook (org-mode . org-bullets-mode))
 #+end_src
 *** Ligatures
 Taken from the ligatures doc.
@@ -216,9 +213,7 @@ Also checks version contorl info, whatever that means.
 #+end_src
 *** Don't bother confirming killing process
 #+begin_src elisp
-(use-package! files
-  :defer t
-  :config
+(after! files
   (setq confirm-kill-processes nil))
 #+end_src
 *** Auto save when emacs is out of focus
