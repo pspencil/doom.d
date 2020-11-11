@@ -1,0 +1,8 @@
+#+TITLE: My configuration
+
+* My Configuration
+Initially, this just contains my doom emacs configuration. But after learning
+about [[https://github.com/hlissner/doom-emacs/tree/develop/modules/config/literate][literate configs]], I feel it is a good way to improve readability. So I
+decided to use it for all my dotfiles. The [[file:other/][other]] directory contains (will
+contain) every =rc= file I did. It has been separated with [[file:config.org][doom emacs configs]]
+since reloading them everytime I modify my emacs configs would be too slow.
