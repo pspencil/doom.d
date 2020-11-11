@@ -9,7 +9,7 @@ Host github.com
   IdentityFile ~/.ssh/github
 #+end_src
 If the key has not been generated, execute
-#+begin_src bash
+#+begin_src bash :tangle no
 ssh-keygen -t ed25519 -C "pan.song@dhs.sg" -f ~/.ssh/github
 #+end_src
 Then add to github.
