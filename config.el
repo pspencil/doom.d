@@ -73,7 +73,8 @@
 
 (setq-default major-mode 'org-mode)
 
-(+global-word-wrap-mode +1)
+(after! adaptive-wrap
+  (+global-word-wrap-mode +1))
 
 (setq +ivy-buffer-preview t)
 

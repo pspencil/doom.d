@@ -25,7 +25,7 @@ variables, and virtually no other languages have adopted it.
       user-mail-address "pan.song@dhs.sg")
 #+end_src
 ** Org directory
-The default doom comment said this should be done before org loads.
+The default doom comment said this should be done before org loads. 
 #+begin_src elisp
 (setq org-directory "~/org/")
 #+end_src
@@ -111,7 +111,7 @@ Some random things I saw online. Not sure what it does actually.
 ** Editing experience
 *** Escape key
 I am used to "fd". The only inconvenience I found is for variable name for
-file descriptor. Luckily I don't write C that much.
+file descriptor. Luckily I don't write C that much. 
 #+begin_src elisp
 (after! evil-escape
   (setq evil-escape-key-sequence "fd"))
@@ -130,7 +130,8 @@ file descriptor. Luckily I don't write C that much.
 #+end_src
 *** Auto wrap
 #+begin_src elisp
-(+global-word-wrap-mode +1)
+(after! adaptive-wrap
+  (+global-word-wrap-mode +1))
 #+end_src
 ** Moving around faster
 *** Preview ivy buffers
