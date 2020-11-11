@@ -157,6 +157,12 @@ fallback to absolute path in that case.
 #+begin_src elisp
 (setq ivy-extra-directories '("."))
 #+end_src
+*** Disable projectile cache
+Fd is fast enough and the projectile is usually [[https://github.com/hlissner/doom-emacs/pull/3376][not updated]].
+#+begin_src elisp
+(after! projectile
+  (setq projectile-enable-caching (not (executable-find doom-projectile-fd-binary))))
+#+end_src
 ** Editor flow optimisation
 *** Prompt for a buffer when splitting windows
 I almost always do this immediately afterwards anyway.

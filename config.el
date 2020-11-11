@@ -89,6 +89,9 @@
 
 (setq ivy-extra-directories '("."))
 
+(after! projectile
+  (setq projectile-enable-caching (not (executable-find doom-projectile-fd-binary))))
+
 (defadvice! prompt-for-buffer (&rest _)
   :after '(evil-window-split evil-window-vsplit)
   (+ivy/switch-buffer))
