@@ -11,15 +11,12 @@
 
 (setq doom-font (font-spec :family "Hasklig" :size 19 :weight 'semi-light))
 
-(use-package paren
-  :defer t
-  :ensure nil
-  :init (setq show-paren-delay 0.5)
-  :config (show-paren-mode +1))
+(after! smartparens
+  (show-smartparens-global-mode))
 
 (use-package! org-bullets
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  :after org
+  :hook (org-mode . org-bullets-mode))
 
 (after! go-mode ; in this case the major mode and package named the same thing
   (set-ligatures! 'go-mode
@@ -65,6 +62,8 @@
   :pipe          "Pipe Keyword" ;; FIXME: find a non-private char
   :dot           "Dot operator")
 
+(setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
+
 (after! evil-escape
   (setq evil-escape-key-sequence "fd"))
 
@@ -74,7 +73,8 @@
 
 (setq-default major-mode 'org-mode)
 
-(setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
+(after! adaptive-wrap
+  (+global-word-wrap-mode +1))
 
 (setq +ivy-buffer-preview t)
 
@@ -87,6 +87,8 @@
       (cons ""
             (expand-file-name (ivy-rich--switch-buffer-directory candidate))))))
 
+(setq ivy-extra-directories '("."))
+
 (defadvice! prompt-for-buffer (&rest _)
   :after '(evil-window-split evil-window-vsplit)
   (+ivy/switch-buffer))
@@ -94,6 +96,11 @@
 ;; (defadvice! always-keep-others-when-saving-perspective (&optional fname phash name keep-others &rest rest-args)
 ;;   :filter-args #'persp-save-to-file-by-names
 ;;   '(fname phash name t rest-args))
+
+(after! files
+  (setq confirm-kill-processes nil))
+
+(setq auth-sources '("~/.authinfo"))
 
 (setq doom-localleader-key ",")
 (setq doom-localleader-alt-key "M-,")
@@ -115,11 +122,6 @@
   :config
   (global-auto-revert-mode 1)
   (setq auto-revert-check-vc-info t))
-
-(use-package! files
-  :defer t
-  :config
-  (setq confirm-kill-processes nil))
 
 (defun xah-save-all-unsaved ()
   "Save all unsaved files. no ask.
