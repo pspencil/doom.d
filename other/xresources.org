@@ -1,0 +1,120 @@
+#+TITLE: Xresources
+#+PROPERTY: header-args :tangle ~/.Xresources :tangle-mode (identity #o644) 
+
+This file contains my =Xresources= config. 
+
+* Urxvt
+** Color Theme
+Taken from [[http://github.com/altercation/solarized][solarized]].
+#+begin_src conf
+*background: #002b36
+*foreground: #657b83
+!!*fading: 40
+*fadeColor: #002b36
+*cursorColor: #93a1a1
+*pointerColorBackground: #586e75
+*pointerColorForeground: #93a1a1
+
+!! black dark/light
+*color0: #073642
+*color8: #002b36
+
+!! red dark/light
+*color1: #dc322f
+*color9: #cb4b16
+
+!! green dark/light
+*color2: #859900
+*color10: #586e75
+
+!! yellow dark/light
+*color3: #b58900
+*color11: #657b83
+
+!! blue dark/light
+*color4: #268bd2
+*color12: #839496
+
+!! magenta dark/light
+*color5: #d33682
+*color13: #6c71c4
+
+!! cyan dark/light
+*color6: #2aa198
+*color14: #93a1a1
+
+!! white dark/light
+*color7: #eee8d5
+*color15: #fdf6e3
+#+end_src
+** Other settings
+#+begin_src conf
+URxvt.depth:                32
+URxvt.geometry:             80x60
+URxvt.transparent:          false
+URxvt.fading:               0
+URxvt.loginShell:           true
+URxvt.saveLines:            50
+URxvt.internalBorder:       3
+URxvt.lineSpace:            0
+URxvt.intensityStyles: false
+
+! Fonts
+URxvt.allow_bold:           false
+URxvt*font: xft:Inconsolata:size=12
+URxvt*boldFont: xft:Inconsolata:size=12
+
+! Fix font space
+URxvt*letterSpace: -1
+
+! Scrollbar
+URxvt.scrollStyle:          rxvt
+URxvt.scrollBar:            false
+
+! Perl extensions
+URxvt.perl-ext-common:      default,matcher,selection-to-clipboard
+URxvt.matcher.button:       1
+URxvt.urlLauncher:          google-chrome-stable
+
+! Cursor
+URxvt.cursorBlink:          true
+URxvt.cursorColor:          #657b83
+URxvt.cursorUnderline:      false
+
+! Pointer
+URxvt.pointerBlank:         true
+#+end_src
+** Keybindings
+I like =C-S-c= and =C-S-v= for copy paste. (mainly paste, copy using tmux's
+selection mode).
+#+begin_src conf
+! This is needed to unbind ctrl-shift bindings from urxvt first.
+URxvt.iso14755 : false
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+#+end_src
+* Xft
+The dpi is usually set to 96. Here it is 150 because my main display is 4K.
+#+begin_src conf
+Xft.dpi:                    150
+Xft.antialias:              true
+Xft.rgba:                   rgb
+Xft.hinting:                true
+Xft.hintstyle:              hintslight
+#+end_src
+* Rofi
+** Theme
+Taken from [[https://github.com/addy-dclxvi/i3-starterpack][i3-starterpack]]
+#+begin_src conf
+rofi.color-enabled: true
+rofi.color-window: #2e3440, #2e3440, #2e3440
+rofi.color-normal: #2e3440, #d8dee9, #2e3440, #2e3440, #bf616a
+rofi.color-active: #2e3440, #b48ead, #2e3440, #2e3440, #93e5cc
+rofi.color-urgent: #2e3440, #ebcb8b, #2e3440, #2e3440, #ebcb8b
+#+end_src
+
+* Misc
+I've had cases where enabling XIM causes emacs to freeze on some systems.
+#+begin_src conf
+emacs*useXIM: false
+#+end_src
