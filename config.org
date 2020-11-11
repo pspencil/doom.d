@@ -103,6 +103,11 @@ Taken from the ligatures doc.
   :dot           "Dot operator")
 #+end_src
 
+*** Magit "gravatars"
+Some random things I saw online. Not sure what it does actually.
+#+begin_src elisp
+(setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
+#+end_src
 ** Editing experience
 *** Escape key
 I am used to "fd". The only inconvenience I found is for variable name for
@@ -123,12 +128,11 @@ file descriptor. Luckily I don't write C that much.
 #+begin_src elisp
 (setq-default major-mode 'org-mode)
 #+end_src
-*** Magit "gravatars"
-Some random things I saw online. Not sure what it does actually.
+*** Auto wrap
 #+begin_src elisp
-(setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
+(+global-word-wrap-mode +1)
 #+end_src
-** Moving around
+** Moving around faster
 *** Preview ivy buffers
 #+begin_src elisp
 (setq +ivy-buffer-preview t)
@@ -147,6 +151,11 @@ fallback to absolute path in that case.
       (cons ""
             (expand-file-name (ivy-rich--switch-buffer-directory candidate))))))
 #+end_src
+*** Do not display ".." in find file.
+"." might still be useful for dired here.
+#+begin_src elisp
+(setq ivy-extra-directories '("."))
+#+end_src
 ** Editor flow optimisation
 *** Prompt for a buffer when splitting windows
 I almost always do this immediately afterwards anyway.
@@ -164,10 +173,10 @@ the same file. Yes I do. This is a failed attempt to always put =t= to
 ;;   :filter-args #'persp-save-to-file-by-names
 ;;   '(fname phash name t rest-args))
 #+end_src
-*** Do not display ".." in find file.
-"." might still be useful for dired here.
+*** Don't bother confirming killing process
 #+begin_src elisp
-(setq ivy-extra-directories '("."))
+(after! files
+  (setq confirm-kill-processes nil))
 #+end_src
 ** Features
 *** Magit Forge setup
@@ -214,11 +223,6 @@ Also checks version contorl info, whatever that means.
   :config
   (global-auto-revert-mode 1)
   (setq auto-revert-check-vc-info t))
-#+end_src
-*** Don't bother confirming killing process
-#+begin_src elisp
-(after! files
-  (setq confirm-kill-processes nil))
 #+end_src
 *** Auto save when emacs is out of focus
 Taken from[[http://ergoemacs.org/emacs/emacs_auto_save.html][ Emacs auto save]] 

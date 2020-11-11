@@ -62,6 +62,8 @@
   :pipe          "Pipe Keyword" ;; FIXME: find a non-private char
   :dot           "Dot operator")
 
+(setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
+
 (after! evil-escape
   (setq evil-escape-key-sequence "fd"))
 
@@ -71,7 +73,7 @@
 
 (setq-default major-mode 'org-mode)
 
-(setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
+(+global-word-wrap-mode +1)
 
 (setq +ivy-buffer-preview t)
 
@@ -84,6 +86,8 @@
       (cons ""
             (expand-file-name (ivy-rich--switch-buffer-directory candidate))))))
 
+(setq ivy-extra-directories '("."))
+
 (defadvice! prompt-for-buffer (&rest _)
   :after '(evil-window-split evil-window-vsplit)
   (+ivy/switch-buffer))
@@ -92,7 +96,8 @@
 ;;   :filter-args #'persp-save-to-file-by-names
 ;;   '(fname phash name t rest-args))
 
-(setq ivy-extra-directories '("."))
+(after! files
+  (setq confirm-kill-processes nil))
 
 (setq auth-sources '("~/.authinfo"))
 
@@ -116,9 +121,6 @@
   :config
   (global-auto-revert-mode 1)
   (setq auto-revert-check-vc-info t))
-
-(after! files
-  (setq confirm-kill-processes nil))
 
 (defun xah-save-all-unsaved ()
   "Save all unsaved files. no ask.
