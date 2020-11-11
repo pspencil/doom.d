@@ -228,5 +228,6 @@ Version 2019-11-05"
 #+end_src
 
 * Notes
+This section contains things that took me some time to investigate.
 ** Making magit push to github directly using ssh key
 See [[file:other/ssh_config.org::*Github access][Github access]].
