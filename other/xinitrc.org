@@ -44,3 +44,11 @@ I use [[https://i3wm.org/][i3]].
 #+begin_src shell
 exec i3
 #+end_src
+* Set keyboard repeat
+#+begin_src shell
+xset r rate 250 60 &
+#+end_src
+* Turn off beep
+#+begin_src shell
+xset b off
+#+end_src
