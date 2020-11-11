@@ -168,6 +168,13 @@ the same file. Yes I do. This is a failed attempt to always put =t= to
 ;;   '(fname phash name t rest-args))
 #+end_src
 
+** Features
+*** Magit Forge setup
+Note we need to follow [[https://magit.vc/manual/forge/Getting-Started.html#Getting-Started][forge manual]] to setup the token. Then use =M-x
+forge-pull= to fetch the original repo.
+#+begin_src elisp
+(setq auth-sources '("~/.authinfo"))
+#+end_src
 ** Custom Keybindings
 *** Local leader
 =SPC M= is too long.
