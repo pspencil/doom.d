@@ -1,8 +1,7 @@
 #+TITLE: My SSH configuration
 #+PROPERTY: header-args :tangle ~/.ssh/config :tangle-mode (identity #o644)
 
-* My SSH Config
-** Github access
+* Github access
 #+begin_src conf
 Host github.com
   IdentitiesOnly yes
