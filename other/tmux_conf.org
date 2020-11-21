@@ -1,0 +1,100 @@
+#+TITLE: My Tmux configuration
+#+PROPERTY: header-args :tangle ~/.tmux.conf :tangle-mode (identity #o644) 
+
+
+* Default terminal
+#+begin_src conf
+set -g default-terminal "screen-256color"
+#+end_src
+* Leader key
+#+begin_src conf
+unbind-key C-b
+set -g prefix 'C-a'
+#+end_src
+* Splitting panes
+#+begin_src conf
+bind / split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+#+end_src
+* Mouse mode
+#+begin_src conf
+set-option -g mouse on
+#+end_src
+* Start index from 1 as 0 is too far
+#+begin_src conf
+set -g base-index 1
+#+end_src
+* Set window titles automatically
+#+begin_src conf
+set-window-option -g automatic-rename on
+set-option -g set-titles on
+#+end_src
+* Copy to system clipboard (also vim keybindings)
+#+begin_src conf
+bind -T copy-mode-vi y send-keys -X copy-pipe 'xclip -in -selection clipboard'
+bind -T copy-mode-vi v send-keys -X begin-selection
+#+end_src
+* Let vim change its cursor shapes
+#+begin_src conf
+set -g -a terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[2 q'
+#+end_src
+* Keybindings
+#+begin_src conf
+set -g status-keys vi
+setw -g mode-keys vi
+#+end_src
+* History limit
+#+begin_src conf
+set -g history-limit 10000
+#+end_src
+* Notifies if there's an activity in a window
+#+begin_src conf
+setw -g monitor-activity on
+#+end_src
+* Moving between panes
+#+begin_src conf
+bind-key -T copy-mode-vi 'C-h' select-pane -L
+bind-key -T copy-mode-vi 'C-j' select-pane -D
+bind-key -T copy-mode-vi 'C-k' select-pane -U
+bind-key -T copy-mode-vi 'C-l' select-pane -R
+bind-key -T copy-mode-vi 'C-\' select-pane -l
+#+end_src
+* Reload
+#+begin_src conf
+bind r source-file ~/.tmux.conf
+#+end_src
+* Plugins
+** Package manager
+#+begin_src conf
+set -g @plugin 'tmux-plugins/tpm'
+#+end_src
+** Sensible tmux
+Not sure what it does
+#+begin_src conf
+set -g @plugin 'tmux-plugins/tmux-sensible'
+#+end_src
+** Navigate between vim windows and tmux panes with consistent keybindings
+#+begin_src conf
+set -g @plugin 'christoomey/vim-tmux-navigator'
+#+end_src
+** Theme
+#+begin_src conf
+set -g @plugin 'seebi/tmux-colors-solarized'
+set -g @colors-solarized 'dark'
+#+end_src
+** Restore tmux after restart
+#+begin_src conf
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @continuum-restore 'on'
+set -g @resurrect-processes 'emacs zathura vim'
+#+end_src
+** Mouse mode
+#+begin_src conf
+set -g @plugin 'nhdaly/tmux-better-mouse-mode'
+#+end_src
+* Run plugin manager
+This should be put at the end of this config.
+#+begin_src conf
+run '~/.tmux/plugins/tpm/tpm'
+#+end_src
