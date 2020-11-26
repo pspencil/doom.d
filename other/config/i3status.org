@@ -33,7 +33,7 @@ load {
 # }
  
 memory {
-        format = "<span background='#b48ead'> %used | %available </span>"
+        format = "<span background='#b48ead'> %available | %total </span>"
         threshold_degraded = "1G"
         format_degraded = "<span background='#bf616a'> MEMORY &lt; %available </span>"
 }
