@@ -1,0 +1,8 @@
+#+TITLE: Utop auto-load
+#+PROPERTY: header-args :tangle ~/.ocamlinit :tangle-mode (identity #o644) 
+
+#+begin_src ocaml
+#use "topfind";;
+#thread;;
+#require "core.top";;
+#+end_src
