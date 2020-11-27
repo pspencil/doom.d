@@ -164,13 +164,6 @@ Fd is fast enough and the projectile is usually [[https://github.com/hlissner/do
   (setq projectile-enable-caching (not (executable-find doom-projectile-fd-binary))))
 #+end_src
 ** Editor flow optimisation
-*** Prompt for a buffer when splitting windows
-I almost always do this immediately afterwards anyway.
-#+begin_src elisp
-(defadvice! prompt-for-buffer (&rest _)
-  :after '(evil-window-split evil-window-vsplit)
-  (+ivy/switch-buffer))
-#+end_src
 *** Do not prompt "keep others" when manually saving
 When saving perspectives, it always prompt me if I wanna keep others in
 the same file. Yes I do. This is a failed attempt to always put =t= to
