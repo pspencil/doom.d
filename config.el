@@ -107,7 +107,7 @@
 (map! :leader
       (:when (featurep! :ui workspaces)
        (:prefix-map ("TAB" . "workspace")
-        :desc "Switch to last workspace" "TAB" #'+workspace/other)))
+        :desc "Switch workspace" "TAB" #'+workspace/switch-to)))
 
 (after! evil
   (define-key evil-window-map "/" 'evil-window-vsplit)

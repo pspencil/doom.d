@@ -192,12 +192,12 @@ forge-pull= to fetch the original repo.
 (setq doom-localleader-key ",")
 (setq doom-localleader-alt-key "M-,")
 #+end_src
-*** SPC TAB TAB to "last" workspace.
+*** SPC TAB TAB switch workspace
 #+begin_src elisp
 (map! :leader
       (:when (featurep! :ui workspaces)
        (:prefix-map ("TAB" . "workspace")
-        :desc "Switch to last workspace" "TAB" #'+workspace/other)))
+        :desc "Switch workspace" "TAB" #'+workspace/switch-to)))
 #+end_src
 *** Window splitting
 I like to use =-= to mean horizontal split and =/= to mean vertial.
