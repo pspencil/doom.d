@@ -1,0 +1,35 @@
+#+TITLE: My config for mbsync
+#+PROPERTY: header-args :tangle ~/.mbsyncrc :tangle-mode (identity #o644) 
+
+* My Gmail
+Use =gpg2 --output XXX.gpg --symmetric YYY= to generate the encrypted password.
+#+begin_src conf
+IMAPAccount dhs
+Host imap.gmail.com
+User pan.song@dhs.sg
+PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/dhs_pass.gpg"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore dhs-remote
+Account dhs
+
+MaildirStore dhs-local
+SubFolders Verbatim
+# The trailing "/" is important
+Path ~/.mail/dhs/
+Inbox ~/.mail/dhs/Inbox
+
+Channel dhs
+Master :dhs-remote:
+Slave :dhs-local:
+MaxMessages 10000
+# Exclude everything under the internal [Gmail] folder, except the interesting folders
+# Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
+# Or include everything
+Patterns *
+# Automatically create missing mailboxes, both locally and on the server
+Create Both
+# Save the synchronization state files in the relevant directory
+SyncState *
+#+end_src

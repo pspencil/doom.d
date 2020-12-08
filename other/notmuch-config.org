@@ -1,0 +1,18 @@
+#+TITLE: Notmuch configurations
+#+PROPERTY: header-args :tangle ~/.notmuch-config :tangle-mode (identity #o644) 
+
+#+begin_src conf
+[database]
+path=.mail/dhs.gmail
+[user]
+name=Song Pan
+primary_email=pan.song@dhs.sg
+[new]
+ignore=/.*[.](json|lock|bak)$/
+[search]
+exclude_tags=deleted;spam;
+[maildir]
+synchronize_flags=true
+[crypto]
+gpg_path=gpg2
+#+end_src

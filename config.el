@@ -101,6 +101,34 @@
 
 (setq auth-sources '("~/.authinfo"))
 
+;; Each path is relative to `+mu4e-mu4e-mail-path', which is ~/.mail by default
+(set-email-account! "DHS"
+                    '((mu4e-sent-folder       . "/DHS/Sent Mail")
+                      (mu4e-drafts-folder     . "/DHS/Drafts")
+                      (mu4e-trash-folder      . "/DHS/Trash")
+                      (mu4e-refile-folder     . "/DHS/All Mail")
+                      (smtpmail-smtp-user     . "pan.song@dhs.sg")
+                      (mu4e-compose-signature . "---\nSong Pan"))
+                    t)
+(after! mu4e
+  (setq mu4e-bookmarks
+        '((:name "Unread messages" :query "flag:unread AND NOT flag:trashed AND maildir:/dhs/Inbox" :key 117)
+          (:name "Today's messages" :query "date:today..now AND maildir:/dhs/Inbox" :key 116)
+          (:name "Last 7 days" :query "date:7d..now AND maildir:/dhs/Inbox" :hide-unread t :key 119)
+          (:name "Messages with images" :query "mime:image/* AND maildir:/dhs/Inbox" :key 112)))
+  (setq mu4e-headers-include-related nil)
+  (setq mu4e-update-interval 300)
+  (setq mu4e-use-fancy-chars t)
+  (setq mu4e-view-show-addresses t)
+  (setq mu4e-view-show-images t)
+  )
+
+(after! message
+  (setq message-cite-style message-cite-style-gmail)
+  (setq message-citation-line-format "On %d %b %Y at %R, %f wrote:\n")
+  (setq message-citation-line-function 'message-insert-formatted-citation-line)
+  )
+
 (setq doom-localleader-key ",")
 (setq doom-localleader-alt-key "M-,")
 
