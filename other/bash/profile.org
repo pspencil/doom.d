@@ -1,32 +1,12 @@
 #+TITLE: My .bash_profile
 #+PROPERTY: header-args :tangle ~/.bash_profile :tangle-mode (identity #o644) 
 
+Things should generally go into [[file:rc.org][bashrc]]. Here I just includes some basic stuff.
+
 * Load .bash_rc, if exists
 See [[file:rc.org][bashrc]].
 #+begin_src shell
 [[ -f ~/.bashrc ]] && . ~/.bashrc
-#+end_src
-* Load aliases, if exists.
-See [[file:alias.org][aliases]].
-#+begin_src shell
-[[ -f ~/.bash_alias ]] && . ~/.bash_alias
-#+end_src
-* Set PATH
-Some common bin directories I usually have.
-#+begin_src shell
-path=/usr/bin:/usr/local/bin:/bin:/usr/local/sbin
-candidates=(
-    /usr/lib/jvm/default/bin
-    /opt/google/chrome
-    ~/bin
-    ~/go/bin
-    ~/matlab/bin
-    ~/.gem/ruby/2.7.0/bin
-)
-for dir in "${candidates[@]}"; do
-    [[ -d $dir ]] && path=$path:$dir
-done
-export PATH=$path    
 #+end_src
 * Start X
 #+begin_src shell
@@ -35,59 +15,3 @@ if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ] \
 	  exec startx
 fi
 #+end_src
-* Start ssh agent
-#+begin_src shell
-SSH_ENV="$HOME/.ssh/environment"
-function start_agent {
-    echo "Initialising new SSH agent..."
-    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-    echo succeeded
-    chmod 600 "${SSH_ENV}"
-    . "${SSH_ENV}" > /dev/null
-    for f in ~/.ssh/*.pub; do
-        ssh-add "${f%.pub}";
-    done
-}
-
-if [ -f "${SSH_ENV}" ]; then
-    . "${SSH_ENV}" > /dev/null
-    #ps ${SSH_AGENT_PID} doesn't work under cywgin
-    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-        start_agent;
-    }
-else
-    start_agent;
-fi
-#+end_src
-* Terminal History
-Probably not needed if we use tmux. But let's set it anyway.
-#+begin_src shell
-export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
-export HISTSIZE=100000                   # big big history
-export HISTFILESIZE=100000               # big big history
-export PROMPT_COMMAND="history -a; history -n"
-#+end_src
-* Software specific settinsg
-** Golang settings
-#+begin_src shell
-[[ -d ~/go ]] && export GOPATH=$HOME/go
-#+end_src
-** OCaml settings
-Setup OPAM
-#+begin_src shell
-[[ -f ~/.opam/opam-init/init.sh ]] && . ~/.opam/opam-init/init.sh > /dev/null 2> /dev/null
-#+end_src
-** Undistract me settings
-#+begin_src shell
-if [[ -f "/etc/profile.d/undistract-me.sh" ]]
-then
-    export UDM_PLAY_SOUND=1
-    source /etc/profile.d/undistract-me.sh
-fi
-#+end_src
-** Lesspipe
-make less more friendly for non-text input files, see [[https://www.commandlinux.com/man-page/man1/lesspipe.1.html][lesspipe(1)]]
-#+begin_src shell
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-#+end_src
-
