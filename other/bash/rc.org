@@ -154,3 +154,10 @@ make less more friendly for non-text input files, see [[https://www.commandlinux
 #+begin_src shell
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 #+end_src
+* Fish
+#+begin_src shell
+if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]
+then
+	exec fish
+fi
+#+end_src

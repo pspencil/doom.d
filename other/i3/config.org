@@ -111,19 +111,9 @@ bindsym $mod+p exec "rofi -lines 12 -padding 18 -width 60 -location 0 -sidebar-m
 bindsym $mod+g exec "rofi -lines 12 -padding 18 -width 60 -location 0 -sidebar-mode -columns 3 -font 'Noto Sans 15' -show window"
 #+end_src
 ** Starting terminal
-This is actually urxvt.
+I am using [[http://st.suckless.org][st]].
 #+begin_src conf
-bindsym $mod+Return exec terminal
-#+end_src
-I have the following in =/usr/bin/terminal=, probably from manjaro default.
-#+begin_src shell :tangle no
-#!/bin/sh
-
-urxvtc $@
-if [ $? -eq 2 ]; then
-  urxvtd -q -o -f
-  urxvtc $@
-fi
+bindsym $mod+Return exec st
 #+end_src
 ** Focus parent container
 #+begin_src conf

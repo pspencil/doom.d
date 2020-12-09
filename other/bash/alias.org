@@ -1,5 +1,5 @@
 #+TITLE: My .bash_alias
-#+PROPERTY: header-args :tangle ~/.bash_aliases :tangle-mode (identity #o644) 
+#+PROPERTY: header-args :tangle ~/.bash_alias :tangle-mode (identity #o644) 
 
 * =ls= aliases
 #+begin_src shell
@@ -7,12 +7,11 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 #+end_src
-* =alert= for long running commands
+* Application overrides
 #+begin_src shell
-# e.g. sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-#+end_src
-* Reload bash config
-#+begin_src shell
-alias reload=". ~/.bash_profile"
+alias cat='bat'
+alias top='htop'
+alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+alias man='tldr'
+alias grep='rg'
 #+end_src

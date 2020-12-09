@@ -41,7 +41,7 @@ The default one.
 #+end_src
 *** Fonts
 #+begin_src elisp
-(setq doom-font (font-spec :family "Hasklig" :size 19 :weight 'semi-light))
+(setq doom-font (font-spec :family "Hack Nerd Font" :size 19 :weight 'semi-light))
 #+end_src
 
 *** Show matching paranthesis
@@ -268,7 +268,11 @@ Version 2019-11-05"
 ;; when switching out of emacs, all unsaved files will be saved
 (add-hook 'focus-out-hook 'xah-save-all-unsaved)
 #+end_src
-
+*** Fish
+#+begin_src emacs-lisp :tangle yes
+(use-package! fish-mode)
+#+end_src
+#+end_src
 * Notes
 This section contains things that took me some time to investigate.
 ** Making magit push to github directly using ssh key
