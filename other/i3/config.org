@@ -445,3 +445,9 @@ exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 #+end_src
 
+
+* Tangle on save
+# Local Variables: 
+# eval: (add-hook 'after-save-hook (lambda ()(org-babel-tangle)) nil t) 
+# End:
+

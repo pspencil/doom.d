@@ -74,3 +74,8 @@ func main() {
 
 }
 #+end_src
+* Tangle on save
+# Local Variables: 
+# eval: (add-hook 'after-save-hook (lambda ()(org-babel-tangle)) nil t) 
+# End:
+

@@ -117,3 +117,8 @@ I've had cases where enabling XIM causes emacs to freeze on some systems.
 #+begin_src conf
 emacs*useXIM: false
 #+end_src
+* Tangle on save
+# Local Variables: 
+# eval: (add-hook 'after-save-hook (lambda ()(org-babel-tangle)) nil t) 
+# End:
+

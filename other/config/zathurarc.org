@@ -45,3 +45,8 @@ set recolor-lightcolor          "#073642" # base02
 set recolor-darkcolor           "#93a1a1" # base1
 set recolor-keephue             true      # keep original color
 #+end_src
+* Tangle on save
+# Local Variables: 
+# eval: (add-hook 'after-save-hook (lambda ()(org-babel-tangle)) nil t) 
+# End:
+
