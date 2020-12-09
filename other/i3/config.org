@@ -111,7 +111,7 @@ bindsym $mod+p exec "rofi -lines 12 -padding 18 -width 60 -location 0 -sidebar-m
 bindsym $mod+g exec "rofi -lines 12 -padding 18 -width 60 -location 0 -sidebar-mode -columns 3 -font 'Noto Sans 15' -show window"
 #+end_src
 ** Starting terminal
-I am using [[http://st.suckless.org][st]].
+I am using [[http://st.suckless.org][st]]. My configuration can be found at [[https://github.com/pspencil/st][here]].
 #+begin_src conf
 bindsym $mod+Return exec st
 #+end_src
