@@ -155,6 +155,8 @@ make less more friendly for non-text input files, see [[https://www.commandlinux
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 #+end_src
 * Fish
+My fish config is [[https://github.com/pspencil/fish-config][here]] in a separate repository because I might change it with
+the GUI ~fish_config~.
 #+begin_src shell
 if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]
 then
