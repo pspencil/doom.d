@@ -275,3 +275,8 @@ Version 2019-11-05"
 This section contains things that took me some time to investigate.
 ** Making magit push to github directly using ssh key
 See [[file:other/ssh_config.org::*Github access][Github access]].
+** Emacs complain about ~sp--while-no-input~ invalid after switching to native-comp
+I checked smartparens code and ~sp--while-no-input~ is defined as an alias
+to ~while-no-input~ when emacs ~version >= 27~. I am not sure why that didn't
+get handled properly by native compilation. I replaced its only usage by
+~while-no-input~ directly and fixes the issue.
