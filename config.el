@@ -9,7 +9,7 @@
 
 (setq doom-theme 'doom-one)
 
-(setq doom-font (font-spec :family "Hack Nerd Font" :size 19 :weight 'semi-light))
+(setq doom-font (font-spec :family "Hasklig" :size 19 :weight 'semi-light))
 
 (after! smartparens
   (show-smartparens-global-mode))

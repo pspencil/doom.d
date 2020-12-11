@@ -41,7 +41,7 @@ The default one.
 #+end_src
 *** Fonts
 #+begin_src elisp
-(setq doom-font (font-spec :family "Hack Nerd Font" :size 19 :weight 'semi-light))
+(setq doom-font (font-spec :family "Hasklig" :size 19 :weight 'semi-light))
 #+end_src
 
 *** Show matching paranthesis
