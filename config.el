@@ -92,6 +92,8 @@
 (after! projectile
   (setq projectile-enable-caching (not (executable-find doom-projectile-fd-binary))))
 
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
+
 ;; (defadvice! always-keep-others-when-saving-perspective (&optional fname phash name keep-others &rest rest-args)
 ;;   :filter-args #'persp-save-to-file-by-names
 ;;   '(fname phash name t rest-args))
@@ -112,9 +114,7 @@
                     t)
 (setq mu4e-bookmarks
       '((:name "Unread messages" :query "flag:unread AND NOT flag:trashed AND maildir:/dhs/Inbox" :key 117)
-        (:name "Today's messages" :query "date:today..now AND maildir:/dhs/Inbox" :key 116)
-        (:name "Last 7 days" :query "date:7d..now AND maildir:/dhs/Inbox" :hide-unread t :key 119)
-        (:name "Messages with images" :query "mime:image/* AND maildir:/dhs/Inbox" :key 112)))
+        (:name "Today's messages" :query "date:today..now AND maildir:/dhs/Inbox" :key 116)))
 (setq mu4e-headers-include-related nil)
 (setq mu4e-update-interval 300)
 (setq mu4e-use-fancy-chars t)
