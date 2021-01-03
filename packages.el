@@ -10,6 +10,9 @@
 (package! keyfreq)
 (package! org-bullets)
 (package! fish-mode)
+(package! nix-mode)
+
+(package! smartparens :pin "9e48911bb1f71fc88b37a257ef63ede6d3133085")
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
 ;; https://github.com/raxod502/straight.el#the-recipe-format
@@ -44,7 +47,7 @@
 
 ;; Doom's packages are pinned to a specific commit and updated from release to
 ;; release. The `unpin!' macro allows you to unpin single packages...
-;(unpin! pinned-package)
+;(unpin! smartparens)
 ;; ...or multiple packages
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)

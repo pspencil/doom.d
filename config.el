@@ -158,3 +158,5 @@ Version 2019-11-05"
 (add-hook 'focus-out-hook 'xah-save-all-unsaved)
 
 (use-package! fish-mode)
+
+(use-package! nix-mode)

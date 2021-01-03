@@ -4,7 +4,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(safe-local-variable-values
-   '((eval add-hook! 'after-save-hook :local #'org-babel-tangle)
+   '((eval font-lock-add-keywords nil
+           `((,(concat "("
+                       (regexp-opt
+                        '("sp-do-move-op" "sp-do-move-cl" "sp-do-put-op" "sp-do-put-cl" "sp-do-del-op" "sp-do-del-cl")
+                        t)
+                       "\\_>")
+              1 'font-lock-variable-name-face)))
+     (eval add-hook! 'after-save-hook :local #'org-babel-tangle)
      (eval add-hook 'after-save-hook
            (lambda nil
              (org-babel-tangle))

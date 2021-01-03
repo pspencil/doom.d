@@ -272,6 +272,9 @@ Version 2019-11-05"
 #+begin_src elisp
 (use-package! fish-mode)
 #+end_src
+*** Nix
+#+begin_src elisp
+(use-package! nix-mode)
 #+end_src
 * Notes
 This section contains things that took me some time to investigate.
