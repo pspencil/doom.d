@@ -64,6 +64,14 @@
 
 (setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
 
+(use-package! xterm-color
+  :after eshell
+  :config
+  (add-hook! 'eshell-mode-hook (setenv "TERM" "xterm-256color"))
+  (add-hook! 'eshell-before-prompt-hook (setq xterm-color-preserve-properties t))
+  (add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
+  (setq eshell-output-filter-functions (remove 'eshell-handle-ansi-color eshell-output-filter-functions)))
+
 (after! evil-escape
   (setq evil-escape-key-sequence "fd"))
 

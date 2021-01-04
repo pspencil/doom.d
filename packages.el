@@ -11,6 +11,7 @@
 (package! org-bullets)
 (package! fish-mode)
 (package! nix-mode)
+(package! xterm-color)
 
 (package! smartparens :pin "9e48911bb1f71fc88b37a257ef63ede6d3133085")
 ;; To install a package directly from a remote git repo, you must specify a
