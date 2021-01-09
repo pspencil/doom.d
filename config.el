@@ -101,6 +101,9 @@
 (after! files
   (setq confirm-kill-processes nil))
 
+(after! password-cache
+  (setq password-cache-expiry 3600))
+
 (setq auth-sources '("~/.authinfo"))
 
 ;; Each path is relative to `+mu4e-mu4e-mail-path', which is ~/.mail by default

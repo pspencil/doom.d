@@ -179,6 +179,11 @@ the same file. Yes I do. This is a failed attempt to always put =t= to
 (after! files
   (setq confirm-kill-processes nil))
 #+end_src
+*** Remember password for longer
+#+begin_src elisp
+(after! password-cache
+  (setq password-cache-expiry 3600))
+#+end_src
 ** Features
 *** Magit Forge setup
 Note we need to follow [[https://magit.vc/manual/forge/Getting-Started.html#Getting-Started][forge manual]] to setup the token. Then use =M-x
