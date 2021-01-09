@@ -86,16 +86,8 @@
 
 (setq +ivy-buffer-preview t)
 
-(after! ivy-rich
-  (setq ivy-rich-path-style 'abbrev)
-  (defadvice! ivy-rich-no-project-fallback (orig-fn candidate)
-    :around #'ivy-rich--switch-buffer-root-and-filename
-    (if-let ((result (funcall orig-fn candidate)))
-        result
-      (cons ""
-            (expand-file-name (ivy-rich--switch-buffer-directory candidate))))))
-
-(setq ivy-extra-directories '("."))
+(after! ivy
+  (setq ivy-extra-directories '(".")))
 
 (after! projectile
   (setq projectile-enable-caching (not (executable-find doom-projectile-fd-binary))))

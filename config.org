@@ -148,24 +148,11 @@ file descriptor. Luckily I don't write C that much.
 #+begin_src elisp
 (setq +ivy-buffer-preview t)
 #+end_src
-*** Display path in ivy-rich.
-Ivy-rich has a [[https://github.com/Yevgnen/ivy-rich/issues/53][bug/feature]] that doesn't show a buffer's path if projectile
-is enabled but the buffer is not in a project. This is a workaround to
-fallback to absolute path in that case.
-#+begin_src elisp
-(after! ivy-rich
-  (setq ivy-rich-path-style 'abbrev)
-  (defadvice! ivy-rich-no-project-fallback (orig-fn candidate)
-    :around #'ivy-rich--switch-buffer-root-and-filename
-    (if-let ((result (funcall orig-fn candidate)))
-        result
-      (cons ""
-            (expand-file-name (ivy-rich--switch-buffer-directory candidate))))))
-#+end_src
 *** Do not display ".." in find file.
 "." might still be useful for dired here.
 #+begin_src elisp
-(setq ivy-extra-directories '("."))
+(after! ivy
+  (setq ivy-extra-directories '(".")))
 #+end_src
 *** Disable projectile cache
 Fd is fast enough and the projectile is usually [[https://github.com/hlissner/doom-emacs/pull/3376][not updated]].
