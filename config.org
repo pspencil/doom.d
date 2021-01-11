@@ -195,10 +195,10 @@ forge-pull= to fetch the original repo.
 #+begin_src elisp
 ;; Each path is relative to `+mu4e-mu4e-mail-path', which is ~/.mail by default
 (set-email-account! "DHS"
-                    '((mu4e-sent-folder       . "/DHS/Sent Mail")
-                      (mu4e-drafts-folder     . "/DHS/Drafts")
-                      (mu4e-trash-folder      . "/DHS/Trash")
-                      (mu4e-refile-folder     . "/DHS/All Mail")
+                    '((mu4e-sent-folder       . "/dhs/Sent Mail")
+                      (mu4e-drafts-folder     . "/dhs/Drafts")
+                      (mu4e-trash-folder      . "/dhs/Trash")
+                      (mu4e-refile-folder     . "/dhs/All Mail")
                       (smtpmail-smtp-user     . "pan.song@dhs.sg")
                       (mu4e-compose-signature . "---\nSong Pan"))
                     t)
@@ -218,6 +218,108 @@ Attempt to get Gmail citation format (not working currently).
   (setq message-citation-line-format "On %d %b %Y at %R, %f wrote:\n")
   (setq message-citation-line-function 'message-insert-formatted-citation-line)
   )
+#+end_src
+*** GTD
+Here are some functions/definitions to help in the GTD system.
+#+begin_src elisp
+(after! org-capture
+  (setq org-capture-templates '(("t" "Todo [inbox]" entry
+                                 (file+headline "~/gtd/inbox.org" "Tasks")
+                                 "* TODO %i%?")
+                                ("T" "Tickler" entry
+                                 (file+headline "~/gtd/tickler.org" "Tickler")
+                                 "* SCHEDULED %i%? \n %U"))))
+
+(setq org-agenda-files '("~/gtd/inbox.org"
+                         "~/gtd/gtd.org"
+                         "~/gtd/tickler.org"))
+(after! org
+  (setq org-todo-keywords '((sequence "TODO(t)" "APPT(a)" "WAITING(w)"
+                                      "STARTED(s)" "|" "DONE(d)" "CANCELLED(c) NOTE(n)")))
+
+  (setq org-refile-targets '(("~/gtd/gtd.org" :maxlevel . 3)
+                             ("~/gtd/someday.org" :level . 1)
+                             ("~/gtd/tickler.org" :maxlevel . 2)))
+
+  (setq org-todo-keyword-faces
+        (quote (("TODO" :foreground "yellow" :weight bold)
+                ("APPT" :forebround "yellow" :weight bold)
+                ("NOTE" :foreground "dark violet" :weight bold)
+                ("STARTED" :foreground "dark orange" :weight bold)
+                ("WAITING" :foreground "red" :weight bold)
+                ("DONE" :foreground "green" :weight bold)
+                ("CANCELLED" :foreground "grey" :weight bold)))))
+
+(defun org-agenda-skip-if-scheduled-later ()
+  "If this function returns nil, the current match should not be skipped.
+Otherwise, the function must return a position from where the search
+should be continued."
+  (ignore-errors
+    (let ((subtree-end (save-excursion (org-end-of-subtree t)))
+          (scheduled-seconds
+           (time-to-seconds
+            (org-time-string-to-time
+             (org-entry-get nil "SCHEDULED"))))
+          (now (time-to-seconds (current-time))))
+      (and scheduled-seconds
+           (>= scheduled-seconds now)
+           subtree-end))))
+
+(setq org-agenda-custom-commands
+      '(
+        ("r" "Feel like some reading?" tags-todo "reading"
+         ((org-agenda-overriding-header "Reading")
+          (org-agenda-skip-function '(org-agenda-skip-if-scheduled-later))))
+        ))
+
+(defvar org-my-archive-expiry-days 7
+  "The number of days after which a completed task should be auto-archived.
+This can be 0 for immediate, or a floating point value.")
+
+(defun org-my-archive-done-tasks ()
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (let ((done-regexp
+           (concat "\\* \\(" (regexp-opt org-done-keywords) "\\) "))
+          (state-regexp
+           (concat "- State \"\\(" (regexp-opt org-done-keywords)
+                   "\\)\"\\s-*\\[\\([^]\n]+\\)\\]")))
+      (while (re-search-forward done-regexp nil t)
+        (let ((end (save-excursion
+                     (outline-next-heading)
+                     (point)))
+              begin)
+          (goto-char (line-beginning-position))
+          (setq begin (point))
+          (if (re-search-forward state-regexp end t)
+              (let* ((time-string (match-string 2))
+                     (when-closed (org-parse-time-string time-string)))
+                (if (>= (time-to-number-of-days
+                         (time-subtract (current-time)
+                                        (apply #'encode-time when-closed)))
+                        org-my-archive-expiry-days)
+                    (org-archive-subtree)))
+            (goto-char end)))))
+    (save-buffer)))
+
+(setq safe-local-variable-values
+      '((eval font-lock-add-keywords nil
+              `((,(concat "("
+                          (regexp-opt
+                           '("sp-do-move-op" "sp-do-move-cl" "sp-do-put-op" "sp-do-put-cl" "sp-do-del-op" "sp-do-del-cl")
+                           t)
+                          "\\_>")
+                 1 'font-lock-variable-name-face)))
+        (eval add-hook! 'after-save-hook :local #'org-babel-tangle)
+        (eval add-hook 'after-save-hook
+              (lambda nil
+                (org-babel-tangle))
+              nil t)
+        (after-save-hook archive-done-tasks)
+        ))
+
+(defalias 'archive-done-tasks 'org-my-archive-done-tasks)
 #+end_src
 ** Custom Keybindings
 *** Local leader
